@@ -10,13 +10,13 @@ let list = document.querySelector(".task-list");
 
 btn.addEventListener("click", () => {
   if (!inpName.value.trim()) {
-    alert("DEBIL NAPISHI CHO NIBYT");
+    alert("Enter Name");
     return;
   } else if (!inpEmail.value.trim()) {
-    alert("DEBIL NAPISHI CHO NIBYT");
+    alert("Enter Email");
     return;
   } else if (!inpImageUrl.value.trim()) {
-    alert("DEBIL NAPISHI CHO NIBYT");
+    alert("Enter Url");
     return;
   }
   let obj = {
@@ -34,17 +34,17 @@ btn.addEventListener("click", () => {
 createElement();
 
 function setItemToStorage(task) {
-  let data = JSON.parse(localStorage.getItem("tasks-data"));
+  let data = JSON.parse(localStorage.getItem("books-data"));
   data.push(task); 
-  localStorage.setItem("tasks-data", JSON.stringify(data));
+  localStorage.setItem("books-data", JSON.stringify(data));
 }
 
 function createElement() {
   list.innerHTML = "";
-  if (!localStorage.getItem("tasks-data")) {
-    localStorage.setItem("tasks-data", "[]");
+  if (!localStorage.getItem("books-data")) {
+    localStorage.setItem("books-data", "[]");
   }
-  let newData = JSON.parse(localStorage.getItem("tasks-data"));
+  let newData = JSON.parse(localStorage.getItem("books-data"));
   newData.forEach((item, index) => {
     let li = document.createElement("li");
     let btnEdit = document.createElement("button");
@@ -71,9 +71,9 @@ function createElement() {
 }
 
 function deleteElement(index) {
-  let data = JSON.parse(localStorage.getItem("tasks-data"));
+  let data = JSON.parse(localStorage.getItem("books-data"));
   data.splice(index, 1);
-  localStorage.setItem("tasks-data", JSON.stringify(data));
+  localStorage.setItem("books-data", JSON.stringify(data));
   createElement();
 }
 
@@ -107,27 +107,25 @@ function editElement(index, item) {
 }
 
 btnsave.addEventListener("click", () => {
-  let data = JSON.parse(localStorage.getItem("tasks-data"));
+  let data = JSON.parse(localStorage.getItem("books-data"));
   let index = inpEdit.id;
-  let index1 = inpEdit1.id;
-  let index2 = inpEdit2.id;
   if (!inpEdit.value.trim()) {
-    alert("Ti MHE DEISTBYESH NA NERVIU");
+    alert("Enter Name");
     return;
   }else if (!inpEdit1.value.trim()) {
-    alert("Ti MHE DEISTBYESH NA NERVIU");
+    alert("Enter Email");
     return;
   } else if (!inpEdit2.value.trim()) {
-    alert("Ti MHE DEISTBYESH NA NERVIU");
+    alert("Enter Url");
     return;
   }
-  let newTsak = {
+  let newBook = {
     name: inpEdit.value,
     email: inpEdit1.value,
     imageurl: inpEdit2.value,
   };
-  data.splice(index, 1, newTsak);
-  localStorage.setItem("tasks-data", JSON.stringify(data));
+  data.splice(index, 1, newBook);
+  localStorage.setItem("books-data", JSON.stringify(data));
   mainModal.style.display = "none";
   createElement();
 });
