@@ -4,6 +4,8 @@ let inpName = document.querySelector(".name-input");
 
 let inpEmail = document.querySelector(".email-input");
 
+let inpNumbers = document.querySelector(".Numders-input");
+
 let inpImageUrl = document.querySelector(".imageUrl-input");
 
 let list = document.querySelector(".task-list");
@@ -18,10 +20,14 @@ btn.addEventListener("click", () => {
   } else if (!inpImageUrl.value.trim()) {
     alert("Enter Url");
     return;
+  } else if (!inpNumbers.value.trim()) {
+    alert("Enter Numders");
+    return;
   }
   let obj = {
     name: inpName.value,
     email: inpEmail.value,
+    numbers: inpNumbers.value,
     imageurl: inpImageUrl.value,
   };
   setItemToStorage(obj);
@@ -29,13 +35,14 @@ btn.addEventListener("click", () => {
   inpName.value = "";
   inpEmail.value = "";
   inpImageUrl.value = "";
+  inpNumbers.value = "";
 });
 
 createElement();
 
 function setItemToStorage(task) {
   let data = JSON.parse(localStorage.getItem("books-data"));
-  data.push(task); 
+  data.push(task);
   localStorage.setItem("books-data", JSON.stringify(data));
 }
 
@@ -50,7 +57,7 @@ function createElement() {
     let btnEdit = document.createElement("button");
     let btnDelete = document.createElement("button");
 
-    li.innerHTML = `name:${item.name} email:${item.email} imageUrl:<img src=${item.imageurl}></img> `;
+    li.innerHTML = `name:${item.name} email:${item.email} numbers:${item.numbers} imageUrl:<img src=${item.imageurl}></img> `;
     btnEdit.innerHTML = "Edit";
     btnDelete.innerHTML = "Delete";
 
@@ -85,6 +92,8 @@ let inpEdit1 = document.querySelector(".inp-edit1");
 
 let inpEdit2 = document.querySelector(".inp-edit2");
 
+let inpEdit3 = document.querySelector(".inp-edit3");
+
 let btnCloser = document.querySelector(".btn-closer");
 
 let btnsave = document.querySelector(".btn-save");
@@ -101,6 +110,9 @@ function editElement(index, item) {
   inpEdit2.setAttribute("id", index);
   inpEdit2.value = item.imageurl;
 
+  inpEdit3.setAttribute("id", index);
+  inpEdit3.value = item.numbers;
+
   btnCloser.addEventListener("click", () => {
     mainModal.style.display = "none";
   });
@@ -112,8 +124,11 @@ btnsave.addEventListener("click", () => {
   if (!inpEdit.value.trim()) {
     alert("Enter Name");
     return;
-  }else if (!inpEdit1.value.trim()) {
+  } else if (!inpEdit1.value.trim()) {
     alert("Enter Email");
+    return;
+  } else if (!inpEdit3.value.trim()) {
+    alert("Enter Numbers");
     return;
   } else if (!inpEdit2.value.trim()) {
     alert("Enter Url");
@@ -122,6 +137,7 @@ btnsave.addEventListener("click", () => {
   let newBook = {
     name: inpEdit.value,
     email: inpEdit1.value,
+    numbers: inpEdit3.value,
     imageurl: inpEdit2.value,
   };
   data.splice(index, 1, newBook);
